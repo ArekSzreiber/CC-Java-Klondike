@@ -9,13 +9,13 @@ import java.util.*;
 
 public class Card extends ImageView {
 
-    private int suit;
-    private int rank;
+    private int suit; // czyli kolorek
+    private int rank; // czyli warość 1, 2, 3, 4, ... , 10, 11 (J), 12 (Q), 13 (K)
     private boolean faceDown;
 
     private Image backFace;
     private Image frontFace;
-    private Pile containingPile;
+    private Pile containingPile; // w jakiej kupce jest ta karta
     private DropShadow dropShadow;
 
     static Image cardBackImage;

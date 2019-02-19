@@ -40,6 +40,9 @@ public class Pile extends Pane {
     }
 
     public int numOfCards() {
+        /*
+        Returns number of cards in a pile
+         */
         //TODO
         return 1;
     }
