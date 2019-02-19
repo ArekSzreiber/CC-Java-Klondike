@@ -87,13 +87,13 @@ public class Card extends ImageView {
     }
 
     public static List<Card> createNewDeck() {
-        List<Card> result = new ArrayList<>();
+        List<Card> deck = new ArrayList<>();
         for (int suit = 1; suit < 5; suit++) {
             for (int rank = 1; rank < 14; rank++) {
-                result.add(new Card(suit, rank, true));
+                deck.add(new Card(suit, rank, true));
             }
         }
-        return result;
+        return deck;
     }
 
     public static void loadCardImages() {
