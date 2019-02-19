@@ -93,6 +93,7 @@ public class Card extends ImageView {
                 deck.add(new Card(suit, rank, true));
             }
         }
+        Collections.shuffle(deck);
         return deck;
     }
 
