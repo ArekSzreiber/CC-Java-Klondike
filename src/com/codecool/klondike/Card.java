@@ -9,13 +9,13 @@ import java.util.*;
 
 public class Card extends ImageView {
 
-    private int suit;
-    private int rank;
+    private int suit; // czyli kolorek
+    private int rank; // czyli warość 1, 2, 3, 4, ... , 10, 11 (J), 12 (Q), 13 (K)
     private boolean faceDown;
 
     private Image backFace;
     private Image frontFace;
-    private Pile containingPile;
+    private Pile containingPile; // w jakiej kupce jest ta karta
     private DropShadow dropShadow;
 
     static Image cardBackImage;
@@ -87,13 +87,14 @@ public class Card extends ImageView {
     }
 
     public static List<Card> createNewDeck() {
-        List<Card> result = new ArrayList<>();
+        List<Card> deck = new ArrayList<>();
         for (int suit = 1; suit < 5; suit++) {
             for (int rank = 1; rank < 14; rank++) {
-                result.add(new Card(suit, rank, true));
+                deck.add(new Card(suit, rank, true));
             }
         }
-        return result;
+        Collections.shuffle(deck);
+        return deck;
     }
 
     public static void loadCardImages() {
