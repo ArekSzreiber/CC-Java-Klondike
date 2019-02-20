@@ -99,29 +99,72 @@ public class Card extends ImageView {
 
     public static void loadCardImages() {
         cardBackImage = new Image("card_images/card_back.png");
-        String suitName = "";
-        for (int suit = 1; suit < 5; suit++) {
-            switch (suit) {
-                case 1:
-                    suitName = "hearts";
-                    break;
-                case 2:
-                    suitName = "diamonds";
-                    break;
-                case 3:
-                    suitName = "spades";
-                    break;
-                case 4:
-                    suitName = "clubs";
-                    break;
-            }
-            for (int rank = 1; rank < 14; rank++) {
-                String cardName = suitName + rank;
-                String cardId = "S" + suit + "R" + rank;
+        String suitName;
+
+        for(Suit suit: Suit.values()) {
+            suitName = suit.getName();
+
+
+            for (Rank rank: Rank.values()) {
+                String cardName = suitName + rank.getRank();
+                String cardId = "S" + suit.getNumber() + "R" + rank.getRank();
                 String imageFileName = "card_images/" + cardName + ".png";
                 cardFaceImages.put(cardId, new Image(imageFileName));
             }
+
         }
+
+    }
+
+    public enum Suit {
+        HEARTS("hearts", 1 ),
+        DIAMONDS("diamonds", 2),
+        SPADES("spades", 3),
+        CLUBS("clubs", 4);
+
+        private String name;
+        private int number;
+
+        Suit(String name, int number) {
+            this.name = name;
+            this.number = number;
+        }
+
+        public String getName() {
+            return this.name;
+        }
+
+        public int getNumber() {
+            return this.number;
+        }
+
+    }
+
+        public enum Rank {
+        ACE(1),
+        TWO(2),
+        THREE(3),
+        FOUR(4),
+        FIVE(5),
+        SIX(6),
+        SEVEN(7),
+        EIGHT(8),
+        NINE(9),
+        TEN(10),
+        JACK(11),
+        QUEEN(12),
+        KING(13);
+
+        private int rank;
+
+        Rank(int rank) {
+            this.rank = rank;
+        }
+
+        public int getRank() {
+            return this.rank;
+        }
+
     }
 
 }
