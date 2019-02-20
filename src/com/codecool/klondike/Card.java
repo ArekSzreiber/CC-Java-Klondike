@@ -78,8 +78,7 @@ public class Card extends ImageView {
     }
 
     public static boolean isOppositeColor(Card card1, Card card2) {
-
-        return true;
+        return card1.isBlack() ^ card2.isBlack();
     }
 
     public static boolean isSameSuit(Card card1, Card card2) {
@@ -101,11 +100,11 @@ public class Card extends ImageView {
         cardBackImage = new Image("card_images/card_back.png");
         String suitName;
 
-        for(Suit suit: Suit.values()) {
+        for (Suit suit : Suit.values()) {
             suitName = suit.getName();
 
 
-            for (Rank rank: Rank.values()) {
+            for (Rank rank : Rank.values()) {
                 String cardName = suitName + rank.getRank();
                 String cardId = "S" + suit.getNumber() + "R" + rank.getRank();
                 String imageFileName = "card_images/" + cardName + ".png";
@@ -117,7 +116,7 @@ public class Card extends ImageView {
     }
 
     public enum Suit {
-        HEARTS("hearts", 1 ),
+        HEARTS("hearts", 1),
         DIAMONDS("diamonds", 2),
         SPADES("spades", 3),
         CLUBS("clubs", 4);
@@ -140,7 +139,7 @@ public class Card extends ImageView {
 
     }
 
-        public enum Rank {
+    public enum Rank {
         ACE(1),
         TWO(2),
         THREE(3),
