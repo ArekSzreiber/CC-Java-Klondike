@@ -82,6 +82,13 @@ public class Card extends ImageView {
         return true;
     }
 
+
+    public static boolean isBlack(Card card) {
+        if (card.getSuit() == 3 || card.getSuit() == 4) {
+            return true;
+        } else return false;
+    }
+
     public static boolean isSameSuit(Card card1, Card card2) {
         return card1.getSuit() == card2.getSuit();
     }
