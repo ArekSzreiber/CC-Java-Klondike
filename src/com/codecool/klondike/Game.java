@@ -116,9 +116,10 @@ public class Game extends Pane {
 
         if(destPile.getPileType() == Pile.PileType.TABLEAU) {
             if (destPile.isEmpty()) {
-                if (card.getRank() == Card.Rank.KING.getRank()) {
-                    return true;
-                }
+                return card.getRank() == Card.Rank.KING.getRank();
+            }else{ // if tableau is not empty
+                Card topCard = destPile.getTopCard();
+                return topCard.isOppositeColor(card);
             }
         }
 
