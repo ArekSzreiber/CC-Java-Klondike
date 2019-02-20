@@ -52,7 +52,8 @@ public class Pile extends Pane {
     }
 
     public void clear() {
-        //TODO
+        //TODO TESTING
+        this.cards.clear();
     }
 
     public void addCard(Card card) {
