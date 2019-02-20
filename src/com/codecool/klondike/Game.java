@@ -79,7 +79,10 @@ public class Game extends Pane {
         if (draggedCards.isEmpty())
             return;
         Card card = (Card) e.getSource();
-        Pile pile = getValidIntersectingPile(card, tableauPiles);
+
+        List<Pile> tableauAndFoundationPiles = createJoinedFoundationAndTableauPiles();
+
+        Pile pile = getValidIntersectingPile(card, tableauAndFoundationPiles);
         //TODO
         if (pile != null) {
             handleValidMove(card, pile);
@@ -88,6 +91,20 @@ public class Game extends Pane {
             draggedCards = null;
         }
     };
+
+    public List<Pile> createJoinedFoundationAndTableauPiles() {
+        List<Pile> tableauAndFoundationPiles = FXCollections.observableArrayList();
+
+        for (Pile pile: tableauPiles) {
+            tableauAndFoundationPiles.add(pile);
+        }
+
+        for (Pile pile: foundationPiles) {
+            tableauAndFoundationPiles.add(pile);
+        }
+
+        return tableauAndFoundationPiles;
+    }
 
     public boolean isGameWon() {
         //TODO
@@ -115,6 +132,7 @@ public class Game extends Pane {
     public boolean isMoveValid(Card card, Pile destPile) {
 
         if (destPile.getPileType() == Pile.PileType.TABLEAU) {
+
             if (destPile.isEmpty()) {
                 return card.getRank() == Card.Rank.KING.getRank();
             } else { // if tableau is not empty
@@ -123,6 +141,18 @@ public class Game extends Pane {
                 boolean previousRankOk = topCard.getRank() - 1 == card.getRank();
                 return oppositeColorOk && previousRankOk;
             }
+
+        } else if (destPile.getPileType() == Pile.PileType.FOUNDATION) {
+
+            if (destPile.isEmpty()) {
+                return card.getRank() == Card.Rank.ACE.getRank();
+            } else {
+                Card topCard = destPile.getTopCard();
+                boolean SuitSameOk = topCard.getSuit() == card.getSuit();
+                boolean NextRankOk = topCard.getRank() == card.getRank() - 1;
+                return SuitSameOk && NextRankOk;
+            }
+
         }
 
         return false;
