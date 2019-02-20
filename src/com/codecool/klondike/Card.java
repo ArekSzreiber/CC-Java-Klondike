@@ -78,7 +78,7 @@ public class Card extends ImageView {
     }
 
     public static boolean isOppositeColor(Card card1, Card card2) {
-        return card1.isBlack() ^ card2.isBlack();
+        return isBlack(card1) ^ isBlack(card2);
     }
 
 
