@@ -43,8 +43,8 @@ public class Pile extends Pane {
         /*
         Returns number of cards in a pile
          */
-        //TODO
-        return 1;
+        //TODO TESTING
+        return this.cards.size();
     }
 
     public boolean isEmpty() {
