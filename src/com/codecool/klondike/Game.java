@@ -114,17 +114,20 @@ public class Game extends Pane {
 
     public boolean isMoveValid(Card card, Pile destPile) {
 
-        if(destPile.getPileType() == Pile.PileType.TABLEAU) {
+        if (destPile.getPileType() == Pile.PileType.TABLEAU) {
             if (destPile.isEmpty()) {
                 return card.getRank() == Card.Rank.KING.getRank();
-            }else{ // if tableau is not empty
+            } else { // if tableau is not empty
                 Card topCard = destPile.getTopCard();
-                return topCard.isOppositeColor(card);
+                boolean oppositeColorOk = topCard.isOppositeColor(card);
+                boolean previousRankOk = topCard.getRank() - 1 == card.getRank();
+                return oppositeColorOk && previousRankOk;
             }
         }
 
         return false;
     }
+
     private Pile getValidIntersectingPile(Card card, List<Pile> piles) {
         Pile result = null;
         for (Pile pile : piles) {
