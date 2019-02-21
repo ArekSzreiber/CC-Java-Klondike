@@ -88,6 +88,7 @@ public class Game extends Pane {
 
         Pile pile = getValidIntersectingPile(card, tableauAndFoundationPiles);
         //TODO
+
         if (pile != null) {
             handleValidMove(card, pile);
         } else {
@@ -129,7 +130,6 @@ public class Game extends Pane {
     }
 
     public void refillStockFromDiscard() {
-        //TODO refill stock from discard
         while (!discardPile.isEmpty()) {
             Card card = discardPile.getTopCard();
             card.moveToPile(stockPile);
