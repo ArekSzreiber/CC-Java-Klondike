@@ -53,7 +53,6 @@ public class Pile extends Pane {
     }
 
     public void clear() {
-        //TODO TESTING
         this.cards.clear();
     }
 
