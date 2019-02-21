@@ -88,11 +88,11 @@ public class Game extends Pane {
             handleValidMove(card, pile);
         } else {
             draggedCards.forEach(MouseUtil::slideBack);
-            draggedCards = null;
+            draggedCards = FXCollections.observableArrayList();;
         }
     };
 
-    public List<Pile> createJoinedFoundationAndTableauPiles() {
+    private List<Pile> createJoinedFoundationAndTableauPiles() {
         List<Pile> tableauAndFoundationPiles = FXCollections.observableArrayList();
 
         for (Pile pile: tableauPiles) {
