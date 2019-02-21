@@ -1,22 +1,21 @@
 package com.codecool.klondike;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundImage;
-import javafx.scene.layout.BackgroundPosition;
-import javafx.scene.layout.BackgroundRepeat;
-import javafx.scene.layout.BackgroundSize;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 public class Game extends Pane {
 
@@ -93,6 +92,11 @@ public class Game extends Pane {
         List<Pile> tableauAndFoundationPiles = createJoinedFoundationAndTableauPiles();
 
         Pile pile = getValidIntersectingPile(card, tableauAndFoundationPiles);
+
+        if (isGameWon()) {
+            showWinPopup();
+        }
+
         if (pile != null) {
             for (Card element : draggedCards) {
                 handleValidMove(element, pile);
@@ -102,6 +106,7 @@ public class Game extends Pane {
             draggedCards.forEach(MouseUtil::slideBack);
             draggedCards = FXCollections.observableArrayList();
         }
+
     };
 
     private List<Pile> createJoinedFoundationAndTableauPiles() {
@@ -119,8 +124,30 @@ public class Game extends Pane {
     }
 
     public boolean isGameWon() {
-        //TODO
-        return false;
+        int cardsOnFoundationPiles = 0;
+        for (Pile pile : foundationPiles) {
+            cardsOnFoundationPiles += pile.getCards().size();
+        }
+
+        if (cardsOnFoundationPiles == 52) {
+            return true;
+        } else return false;
+    }
+
+    private void showWinPopup() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Application information");
+        alert.setHeaderText("Congratulations, you won!");
+        alert.setContentText("Do you want to replay?");
+        alert.show();
+
+//        Optional<ButtonType> result = alert.showAndWait();
+//        if (result.get() == ButtonType.OK) {
+//            restartGame();
+//        }
+//        else {
+//            Platform.exit();
+//        }
     }
 
     public Game() {
