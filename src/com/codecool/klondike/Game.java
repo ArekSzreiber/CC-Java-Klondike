@@ -2,6 +2,7 @@ package com.codecool.klondike;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
@@ -68,15 +69,20 @@ public class Game extends Pane {
         double offsetY = e.getSceneY() - dragStartY;
 
         draggedCards.clear();
-        draggedCards.add(card);
+        int cardIndex = activePile.getCards().indexOf(card);
 
-        card.getDropShadow().setRadius(20);
-        card.getDropShadow().setOffsetX(10);
-        card.getDropShadow().setOffsetY(10);
+        for (Card element : activePile.getCards()) {
+            if (activePile.getCards().indexOf(element) >= cardIndex) {
+                draggedCards.add(element);
+                element.getDropShadow().setRadius(20);
+                element.getDropShadow().setOffsetX(10);
+                element.getDropShadow().setOffsetY(10);
 
-        card.toFront();
-        card.setTranslateX(offsetX);
-        card.setTranslateY(offsetY);
+                element.toFront();
+                element.setTranslateX(offsetX);
+                element.setTranslateY(offsetY);
+            }
+        }
     };
 
     private EventHandler<MouseEvent> onMouseReleasedHandler = e -> {
@@ -87,10 +93,11 @@ public class Game extends Pane {
         List<Pile> tableauAndFoundationPiles = createJoinedFoundationAndTableauPiles();
 
         Pile pile = getValidIntersectingPile(card, tableauAndFoundationPiles);
-        //TODO
-
         if (pile != null) {
-            handleValidMove(card, pile);
+            for (Card element : draggedCards) {
+                handleValidMove(element, pile);
+            }
+            //handleValidMove(card, pile);
         } else {
             draggedCards.forEach(MouseUtil::slideBack);
             draggedCards = FXCollections.observableArrayList();
