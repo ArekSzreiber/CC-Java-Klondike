@@ -33,6 +33,7 @@ public class Game extends Pane {
     private EventHandler<MouseEvent> onMouseClickedHandler = e -> {
         Card card = (Card) e.getSource();
         if (card.getContainingPile().getPileType() == Pile.PileType.STOCK) {
+            card = card.getContainingPile().getTopCard();
             card.moveToPile(discardPile);
             card.flip();
             card.setMouseTransparent(false);
@@ -151,7 +152,12 @@ public class Game extends Pane {
     }
 
     public void refillStockFromDiscard() {
-        //TODO
+        //TODO refill stock from discard
+        while (!discardPile.isEmpty()) {
+            Card card = discardPile.getTopCard();
+            card.moveToPile(stockPile);
+            card.flip();
+        }
         System.out.println("Stock refilled from discard pile.");
     }
 
@@ -217,19 +223,27 @@ public class Game extends Pane {
 
     }
 
-
-    private void initPiles() {
-        stockPile = new Pile(Pile.PileType.STOCK, "Stock", STOCK_GAP);
+    private void setStockPilePosition() {
         stockPile.setBlurredBackground();
         stockPile.setLayoutX(95);
         stockPile.setLayoutY(20);
-        stockPile.setOnMouseClicked(stockReverseCardsHandler);
-        getChildren().add(stockPile);
+    }
 
-        discardPile = new Pile(Pile.PileType.DISCARD, "Discard", STOCK_GAP);
+    private void setDiscardPilePosition() {
         discardPile.setBlurredBackground();
         discardPile.setLayoutX(285);
         discardPile.setLayoutY(20);
+    }
+
+    private void initPiles() {
+        stockPile = new Pile(Pile.PileType.STOCK, "Stock", STOCK_GAP);
+        setStockPilePosition();
+        stockPile.setOnMouseClicked(stockReverseCardsHandler);
+        getChildren().add(stockPile);
+
+
+        discardPile = new Pile(Pile.PileType.DISCARD, "Discard", STOCK_GAP);
+        setDiscardPilePosition();
         getChildren().add(discardPile);
 
         for (int i = 0; i < 4; i++) {
