@@ -59,6 +59,9 @@ public class Game extends Pane {
         if (activePile.getPileType() == Pile.PileType.STOCK) {
             return;
         }
+        if (card.isFaceDown()) {
+            return;
+        }
 
         double offsetX = e.getSceneX() - dragStartX;
         double offsetY = e.getSceneY() - dragStartY;
@@ -130,6 +133,7 @@ public class Game extends Pane {
     }
 
     public boolean isMoveValid(Card card, Pile destPile) {
+
         if (destPile.getPileType() == Pile.PileType.TABLEAU) {
 
             if (destPile.isEmpty()) {
