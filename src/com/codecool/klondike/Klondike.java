@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 
 public class Klondike extends Application {
 
+
     private static final double WINDOW_WIDTH = 1400;
     private static final double WINDOW_HEIGHT = 900;
 
@@ -16,6 +17,7 @@ public class Klondike extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         Card.loadCardImages();
         Game game = new Game();
         game.setTableBackground(new Image("/table/green.png"));
@@ -23,6 +25,7 @@ public class Klondike extends Application {
         primaryStage.setTitle("Klondike Solitaire");
         primaryStage.setScene(new Scene(game, WINDOW_WIDTH, WINDOW_HEIGHT));
         primaryStage.show();
+
     }
 
 }
