@@ -60,6 +60,7 @@ public class MouseUtil {
                         currentCard.getDropShadow().setOffsetY(0);
                     });
         }
+
     }
 
     private static void animateCardMovement(

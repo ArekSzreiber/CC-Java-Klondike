@@ -58,8 +58,12 @@ public class Pile extends Pane {
     }
 
     public void addCard(Card card) {
+        Pile previousPile = card.getContainingPile();
         cards.add(card);
         card.setContainingPile(this);
+        if (previousPile != null) {
+            previousPile.getTopCard().flipToFront();
+        }
         card.toFront();
         layoutCard(card);
     }

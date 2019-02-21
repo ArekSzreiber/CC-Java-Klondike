@@ -95,11 +95,11 @@ public class Game extends Pane {
     public List<Pile> createJoinedFoundationAndTableauPiles() {
         List<Pile> tableauAndFoundationPiles = FXCollections.observableArrayList();
 
-        for (Pile pile: tableauPiles) {
+        for (Pile pile : tableauPiles) {
             tableauAndFoundationPiles.add(pile);
         }
 
-        for (Pile pile: foundationPiles) {
+        for (Pile pile : foundationPiles) {
             tableauAndFoundationPiles.add(pile);
         }
 
@@ -130,7 +130,6 @@ public class Game extends Pane {
     }
 
     public boolean isMoveValid(Card card, Pile destPile) {
-
         if (destPile.getPileType() == Pile.PileType.TABLEAU) {
 
             if (destPile.isEmpty()) {
@@ -186,15 +185,9 @@ public class Game extends Pane {
         } else {
             msg = String.format("Placed %s to %s.", card, destPile.getTopCard());
         }
-        System.out.println(msg);
         MouseUtil.slideToDest(draggedCards, destPile);
         draggedCards.clear();
-        //wez karte, na ktorej jest teraz karta
-        Pile sourcePile = card.getContainingPile();
-        //odwroc ja
-        if (!sourcePile.isEmpty() && sourcePile.getPileType() == Pile.PileType.TABLEAU){
-            sourcePile.getTopCard().flip();
-        }
+
     }
 
 
@@ -242,7 +235,9 @@ public class Game extends Pane {
                 addMouseEventHandlers(nextCard);
                 getChildren().add(nextCard);
 
-                if (i == cardAdder -1) { nextCard.flip(); }
+                if (i == cardAdder - 1) {
+                    nextCard.flip();
+                }
             }
 
 

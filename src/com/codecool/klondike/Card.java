@@ -72,6 +72,11 @@ public class Card extends ImageView {
         setImage(faceDown ? backFace : frontFace);
     }
 
+    public void flipToFront() {
+        faceDown = false;
+        setImage(frontFace);
+    }
+
     @Override
     public String toString() {
         return "The " + "Rank" + rank + " of " + "Suit" + suit;
