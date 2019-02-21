@@ -189,6 +189,12 @@ public class Game extends Pane {
         System.out.println(msg);
         MouseUtil.slideToDest(draggedCards, destPile);
         draggedCards.clear();
+        //wez karte, na ktorej jest teraz karta
+        Pile sourcePile = card.getContainingPile();
+        //odwroc ja
+        if (!sourcePile.isEmpty() && sourcePile.getPileType() == Pile.PileType.TABLEAU){
+            sourcePile.getTopCard().flip();
+        }
     }
 
 
