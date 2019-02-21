@@ -61,7 +61,7 @@ public class Pile extends Pane {
         Pile previousPile = card.getContainingPile();
         cards.add(card);
         card.setContainingPile(this);
-        if (previousPile != null) {
+        if (previousPile != null && previousPile.getPileType() == PileType.TABLEAU) {
             previousPile.getTopCard().flipToFront();
         }
         card.toFront();
