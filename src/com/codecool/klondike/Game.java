@@ -126,6 +126,7 @@ public class Game extends Pane {
         alert.setTitle("Application information");
         alert.setHeaderText("Congratulations, you won!");
         alert.setContentText("Do you want to replay?");
+        alert.show();
 
 //        Optional<ButtonType> result = alert.showAndWait();
 //        if (result.get() == ButtonType.OK) {
