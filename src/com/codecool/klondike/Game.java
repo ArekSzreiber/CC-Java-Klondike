@@ -130,11 +130,9 @@ public class Game extends Pane {
 
     public void refillStockFromDiscard() {
         //TODO refill stock from discard
-        setDiscardPilePosition();
-        setStockPilePosition();
-        for (Card card : discardPile.getCards()) {
-            //ustaw pozycję stocku na tą początkową
-            stockPile.addCard(card);
+        while (!discardPile.isEmpty()) {
+            Card card = discardPile.getTopCard();
+            card.moveToPile(stockPile);
             card.flip();
         }
         System.out.println("Stock refilled from discard pile.");
@@ -202,13 +200,13 @@ public class Game extends Pane {
 
     }
 
-    private void setStockPilePosition(){
+    private void setStockPilePosition() {
         stockPile.setBlurredBackground();
         stockPile.setLayoutX(95);
         stockPile.setLayoutY(20);
     }
 
-    private void setDiscardPilePosition(){
+    private void setDiscardPilePosition() {
         discardPile.setBlurredBackground();
         discardPile.setLayoutX(285);
         discardPile.setLayoutY(20);
